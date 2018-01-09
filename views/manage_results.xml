@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- MANAGE RESULT VIEW -->
+          <record model="ir.ui.view" id="result_list">
+            <field name="name">Result</field>
+            <field name="model">student.result</field>
+            <field name="arch" type="xml">
+              <tree editable="bottom">
+                <field name="subject_ids"/>
+                <field name="subject_score"/>
+              </tree>
+            </field>
+          </record>
+        <!-- MANAGE RESULT VIEW -->
+    </data>
+</odoo>

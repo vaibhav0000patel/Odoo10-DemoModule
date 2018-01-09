@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- MANAGE SUBJECTS VIEW -->
+          <record model="ir.ui.view" id="subject_attr_list">
+            <field name="name">All Subjects</field>
+            <field name="model">student.subjects</field>
+            <field name="arch" type="xml">
+              <tree>
+
+                <field name="subject_name"/>
+              </tree>
+            </field>
+          </record>
+
+          <record model="ir.ui.view" id="subject_attr_form">
+            <field name="name">Edit Subjects</field>
+            <field name="model">student.subjects</field>
+            <field name="arch" type="xml">
+              <form>
+                <group>
+                  <field name="subject_name" />
+                </group>
+              </form>
+            </field>
+          </record>
+        <!-- MANAGE SUBJECTS VIEW -->
+
+        <!-- SUBJECT ACTION WINDOW -->
+            <record model="ir.actions.act_window" id="subject_attr_action_window">
+              <field name="name">Manage Subjects</field>
+              <field name="res_model">student.subjects</field>
+              <field name="view_mode">tree,form</field>
+              <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                  Click here to create new item!
+                </p>
+              </field>
+            </record>
+        <!-- SUBJECT ACTION WINDOW -->
+    </data>
+</odoo>

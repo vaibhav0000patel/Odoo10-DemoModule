@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <report
+            id="report_student_attendance"
+            string="Student Attendance"
+            model="student.profile"
+            report_type="qweb-pdf"
+            attachment_use="True"
+            file="student.student_attendance_report_template"
+            name="student.student_attendance_report_template"
+            attachment="((object.name or '').replace('/','_')+'_attendance.pdf')"
+        />
+    </data>
+</odoo>

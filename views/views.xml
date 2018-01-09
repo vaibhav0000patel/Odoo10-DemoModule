@@ -1,0 +1,233 @@
+<odoo>
+  <data>
+
+    <!-- STUDENT PROFILE VIEW -->
+      <record model="ir.ui.view" id="student_profile_list">
+        <field name="name">Student Profile List</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+          <tree string="Status" colors="blue:current_status_id==1;green:current_status_id==2;red:current_status_id==3">
+            <!--<field name="data_image" widget="image" class="oe_right oe_avatar" options="{'preview_image': 'data_image', 'size': [30, 30]}"/>-->
+            <field name="name"/>
+            <field name="email"/>
+            <field name="dob"/>
+            <field name="city"/>
+            <field name="country_id"/>
+            <field name="status_id"/>
+            <field name="lunch_time"/>
+
+            <field name="current_status_id" invisible="True"/>
+          </tree>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="student_profile_form">
+        <field name="name">Student Profile Form</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+          <form>
+              <header class="oe_center">
+
+                  <button string="Enrolled" name="status_change" type="object" context="{'status_id_ctx':1}" attrs="{'invisible': [('status_id','=',1)]}"/>
+                  <button string="Pursuing" name="status_change" type="object" context="{'status_id_ctx':2}" attrs="{'invisible': [('status_id','=',2)]}"/>
+                  <button string="Alumni" name="status_change" type="object" context="{'status_id_ctx':3}" attrs="{'invisible': [('status_id','=',3)]}"/>
+
+                  <button name="action_quotation_send" string="Send Profile e-mail" type="object" class="oe_highlight"/>
+
+                  <button name="action_quotation_send_attendance" string="Send Attendance e-mail" type="object" class="oe_highlight"/>
+
+                  <button name="duplicate_student_record" string="Duplicate Student info" type="object" class="oe_highlight"/>
+
+                  <field name="status_id" widget="statusbar"/>
+
+              </header>
+            <sheet>
+
+              <field name="data_image" widget="image" options="{'preview_image': 'data_image', 'size': [150, 150]}"/>
+
+              <group string="Student Profile">
+                <group>
+                    <field name="name" />
+                    <field name="email" widget="email"/>
+                    <field name="dob" />
+                    <field name="website" widget="url"/>
+                    <field name="lunch_time" widget="float_time"/>
+                </group>
+                <group>
+                  <field name="city" />
+                  <field name="country_id" />
+                  <!--<field name="hobbies_ids" widget="many2many_tags"/>-->
+                  <field name="gender" widget="radio"/>
+                </group>
+              </group>
+
+              <group>
+                <notebook>
+                    <page string="Result">
+                        <group style="width=66%;">
+                          <field name="result_id" style="max-width:600px"/>
+                        </group>
+                        <group class="oe_subtotal_footer">
+                          <field name="total"/>
+                          <field name="average" widget="percentage" />
+                        </group>
+                    </page>
+                    <page string="Hobbies">
+                      <field name="hobbies_ids" widget="handle"/>
+                    </page>
+                    <page string="Attendance">
+                        <field name="attendance_ids" >
+                            <tree editable="bottom">
+                                <!--<field name="date"/>-->
+                                <field name="in_time"/>
+                                <field name="out_time"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+              </group>
+
+            </sheet>
+          </form>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="student_profile_graph">
+        <field name="name">Student Profile Graph</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+          <graph>
+            <field name="name"/>
+            <field name="total" type="measure" />
+          </graph>
+        </field>
+      </record>calendar
+
+      <record model="ir.ui.view" id="student_profile_calendar">
+        <field name="name">Student Profile Calendar</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+          <calendar string="Birthdays" color="name" date_start="dob">
+            <field name="name"/>
+            <field name="email"/>
+            <field name="dob"/>
+            <field name="city"/>
+            <field name="country_id"/>
+            <field name="status_id" />
+          </calendar>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="student_profile_pivot">
+        <field name="name">Student Profile Pivot</field>
+        <field name="model">student.profile</field>
+        <field name="arch" type="xml">
+          <pivot>
+            <field name="name"/>
+            <field name="total" type="measure" />
+          </pivot>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="student_profile_kanban">
+      <field name="name">Student Profile Kanban</field>
+      <field name="model">student.profile</field>
+      <field name="arch" type="xml">
+        <kanban >
+          <field name="name"/>
+          <field name="data_image"/>
+          <field name="dob"/>
+          <field name="city"/>
+          <field name="country_id"/>
+          <field name="kb_color"/>
+          <templates>
+
+            <t t-name="kanban-box">
+              <div  t-attf-class="#{kanban_color(record.kb_color.raw_value)} oe_kanban_global_click" >
+
+                  <div class="o_kanban_image">
+                      <img t-att-src="kanban_image('student.template', 'data_image', record.id.value)"/>
+                  </div>
+                  <div class="oe_kanban_details">
+                    <strong>
+                      <field name="name"/>
+                    </strong>
+                    <div style="text-align:right;
+                                text-align: right;
+                                display: inline-block;
+                                float: right;
+                                background-color: #c1bcbc;
+                                padding: 2px 10px;
+                                color: #000000;
+                                border-radius: 20px;">
+                      <field name="status_id"></field>
+                    </div>
+                    <div name="tags"/>
+                    <ul>
+                      <li>DOB : <field name="dob"></field></li>
+                      <li>Email : <field name="email"/> </li>
+                      <li>City : <field name="city"></field> </li>
+                      <li>Country : <field name="country_id"></field> [<field name="country_cc"></field>]</li>
+                    </ul>
+                    <div name="tags"/>
+                  </div>
+
+              </div>
+            </t>
+
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- STUDENT PROFILE VIEW -->
+
+      <!-- STUDENT PROFILE SEARCH -->
+      <record model="ir.ui.view" id="student_profile_search">
+        <field name="name">Student Profile search</field>
+        <field name="model">student.profile</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+          <search string="Search User Info">
+            <field name="name" filter_domain="['|','|',('name','ilike',self),('country_id','ilike',self),('city','ilike',self)]" string="All"/>
+            <field name="name" filter_domain="[('name','ilike',self)]" string="Name"/>
+            <field name="country_id" filter_domain="[('country_id','ilike',self)]" string="Country"/>
+            <field name="status_id" filter_domain="[('status_id','ilike',self)]" string="Status"/>
+            <field name="hobbies_ids" filter_domain="[('hobbies_ids','ilike',self)]" string="Hobbies"/>
+            <field name="city" filter_domain="[('city','ilike',self)]" string="City"/>
+            <filter domain="[('country_id', '=', 'India')]" string="India"/>
+            <filter domain="[('country_id', '=', 'Canada')]" string="Canada"/>
+            <group expand="0" string="Group By">
+                <filter string="Country" context="{'group_by': 'country_id'}"/>
+                <filter string="City" context="{'group_by': 'city'}"/>
+            </group>
+          </search>
+        </field>
+      </record>
+      <!-- STUDENT PROFILE SEARCH -->
+
+
+      <!--FILTERED STUDENT PROFILE ACTION WINDOW -->
+      <record id="filtered_students_list" model="ir.actions.act_window">
+          <field name="name">Student Profiles List [Filtered View]</field>
+          <field name="res_model">student.profile</field>
+      </record>
+      <!--FILTERED STUDENT PROFILE ACTION WINDOW -->
+
+
+      <!-- STUDENT PROFILE ACTION WINDOW -->
+      <record model="ir.actions.act_window" id="student_profile_action_window">
+        <field name="name">Student Profiles</field>
+        <field name="res_model">student.profile</field>
+        <field name="view_mode">kanban,pivot,graph,tree,form,calendar</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click here to create new item!
+          </p>
+        </field>
+      </record>
+      <!-- STUDENT PROFILE ACTION WINDOW -->
+
+
+  </data>
+</odoo>

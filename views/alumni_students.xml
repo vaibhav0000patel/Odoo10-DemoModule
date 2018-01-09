@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+        <!--ALUMANI STUDENT PROFILE ACTION WINDOW -->
+        <record model="ir.actions.act_window" id="alumani_student_profile_action_window">
+          <field name="name">Alumani Student Profiles</field>
+          <field name="res_model">student.profile</field>
+          <field name="view_mode">kanban,pivot,graph,tree,form,calendar</field>
+          <field name="domain">[('status_id','=',3)]</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Click here to create new item!
+            </p>
+          </field>
+        </record>
+        <!--ALUMANI STUDENT PROFILE ACTION WINDOW -->
+    </data>
+</odoo>

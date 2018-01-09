@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- Top menu item -->
+        <menuitem name="Student Management" id="student.menu_root" />
+
+        <!-- menu categories -->
+        <menuitem name="Student Info" id="student.student_info" parent="student.menu_root"/>
+            <menuitem name="Student Profiles" id="student.student_profile" parent="student.student_info" action="student_profile_action_window"/>
+            <menuitem name="Alumani Student Profiles" id="student.alumani_student_profile" parent="student.student_info" action="alumani_student_profile_action_window"/>
+            <menuitem name="Attendance" id="student.attendance_info" parent="student.student_info" action="attendance_action_window"/>
+
+
+        <menuitem name="Result Attributes" id="student.result_attr" parent="student.menu_root"/>
+            <menuitem name="Subjects" id="student.subjects_attr" parent="student.result_attr" action="subject_attr_action_window"/>
+
+        <menuitem name="Profile Attributes" id="student.profile_attr" parent="student.menu_root"/>
+            <menuitem name="Country" id="student.country_attr" parent="student.profile_attr" action="country_attr_action_window"/>
+            <menuitem name="Status" id="student.status_attr" parent="student.profile_attr" action="status_attr_action_window"/>
+            <menuitem name="Hobby" id="student.hobby_attr" parent="student.profile_attr" action="hobby_attr_action_window"/>
+    </data>
+</odoo>

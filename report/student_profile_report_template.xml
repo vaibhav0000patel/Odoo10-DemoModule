@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="student_profile_report_template">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="report.external_layout">
+
+                    <div class="page">
+                        <h2 style="text-align:center">Student Profile</h2>
+                        <div style="width:30%;float:left;" align="center">
+                            <div style="width:100%;float:left;">
+                                <img t-attf-src="data:image/*;base64,{{o.data_image}}" style="width:150px;margin:10px;text-align:center;"/>
+                            </div>
+                            <h3 style="text-align:center;"><span t-field="o.name"/></h3>
+
+                            <t t-if="o.current_status_id == 1">
+                                <div style="width:100%;float:left;">
+                                    <div style="display: inline-block;
+                                                padding: 5px 10px;
+                                                background-color: #95cdfd;">
+                                        Enrolled
+                                    </div>
+                                </div>
+                            </t>
+                            <t t-if="o.current_status_id == 2">
+                                <div style="width:100%;float:left;">
+                                    <div style="display: inline-block;
+                                                padding: 5px 10px;
+                                                background-color: #95ff9e;">
+                                        Pursuing
+                                    </div>
+                                </div>
+                            </t>
+                            <t t-if="o.current_status_id == 3">
+                                <div style="width:100%;float:left;">
+                                    <div style="display: inline-block;
+                                                padding: 5px 10px;
+                                                background-color: #fdb7b7;">
+                                        Alumni
+                                    </div>
+                                </div>
+                            </t>
+                            <!--<span t-field="o.data_image" t-field-options='{"widget": "image"}'/>-->
+                        </div>
+                        <div style="width:70%;float:left">
+                            <table class="table">
+                                <tbody>
+                                    <tr><td>Email</td><td><a href="{{ o.email }}"><span t-field="o.email"/></a></td></tr>
+                                    <tr><td>Birthdate</td><td><span t-field="o.dob"/></td></tr>
+                                    <tr><td>Gender</td><td><span t-field="o.gender"/></td></tr>
+                                    <tr><td>Website</td><td><a href="{{ o.website }}"><span t-field="o.website"/></a></td></tr>
+                                    <tr><td>City</td><td><span t-field="o.city"/></td></tr>
+                                    <tr><td>Country</td><td><span t-field="o.country_id"/></td></tr>
+                                    <tr>
+                                        <td>Hobbies</td>
+                                        <td>
+                                            <t t-foreach="o.hobbies_ids" t-as="hb">
+                                                <div style="
+                                                    display:inline-block;
+                                                    padding: 2px 10px;
+                                                    margin: 3px;
+                                                    border-radius: 10px;
+                                                    background-color: #dcdbdb;
+                                                "><span t-esc="hb.hobby_name"/></div>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Subjects</th>
+                                    <th>Marks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr t-foreach="o.result_id" t-as="row">
+                                        <td><t t-esc="row.subject_ids[0].subject_name"/></td>
+                                        <td><t t-esc="row.subject_score"/></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                        <h3 style="text-align:right;"> Total : <span t-field="o.total"/></h3>
+                        <h4 style="text-align:right;"> Average : <span t-field="o.average"/></h4>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

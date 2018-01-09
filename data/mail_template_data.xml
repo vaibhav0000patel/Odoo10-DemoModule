@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="student_profile_email_template" model="mail.template">
+            <field name="name">Student Profile</field>
+            <field name="email_from">shubham0000patel@gmail.com</field>
+            <field name="subject">${object.name} Profile</field>
+            <field name="email_to">${object.email}</field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="student.model_student_profile"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="student.report_student_profile"/>
+            <field name="report_name">${(object.name).replace(' ','_')}_profile_report</field>
+            <field name="body_html">
+              <![CDATA[
+
+	            <p>Dear ${(object.name)},<br/><br/>
+		         Here is your Profile Information<br/></p>
+
+                        <div style="width: 100%;float:left;">
+                            <div style="width: 20%;float:left;font-weight:bold">Subject</div>
+                            <div style="width: 80%;float:left;font-weight:bold">Marks</div>
+                        </div>
+
+                        <br/><br/>
+
+                         % for row in object.result_id:
+                        <div style="width: 100%;float:left;">
+                            <div style="width: 20%;float:left">${(row.subject_ids[0].subject_name)}</div>
+                            <div style="width: 80%;float:left">${(row.subject_score)}</div>
+                        </div>
+                        % endfor
+
+                        <br/><br/>
+                        <div style="width: 100%;float:left;">
+                            <div style="width: 20%;float:left;font-weight:bold">Total</div>
+                            <div style="width: 80%;float:left;font-weight:bold">${(object.total)}</div>
+                        </div>
+
+                        <div style="width: 100%;float:left;">
+                            <div style="width: 20%;float:left;font-weight:bold">Average</div>
+                            <div style="width: 80%;float:left;font-weight:bold">${(object.average)}%</div>
+                        </div>
+
+                 <br/>
+
+                 <p> Regards,<br/>
+                     ${(object.name)}</p>
+              ]]>
+	        </field>
+       </record>
+        <record id="student_attendance_email_template" model="mail.template">
+            <field name="name">Student Attendance</field>
+            <field name="email_from">shubham0000patel@gmail.com</field>
+            <field name="subject">${object.name} Attendance</field>
+            <field name="email_to">${object.email}</field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="student.model_student_profile"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_template" ref="student.report_student_attendance"/>
+            <field name="report_name">${(object.name).replace(' ','_')}_attendance_report</field>
+            <field name="body_html">
+              <![CDATA[
+
+	            <p>Dear ${(object.name)},<br/><br/>
+		         PFA for your Attendance Report<br/></p>
+
+                 <p> Regards,<br/>
+                     ${(object.name)}</p>
+              ]]>
+	        </field>
+       </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_student_profile"
+            string="Student Profile"
+            model="student.profile"
+            report_type="qweb-pdf"
+            attachment_use="True"
+            file="student.student_profile_report_template"
+            name="student.student_profile_report_template"
+            attachment="((object.name or '').replace('/','_')+'_profile.pdf')"
+        />
+
+    </data>
+</odoo>

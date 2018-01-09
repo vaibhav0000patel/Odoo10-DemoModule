@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- MANAGE COUNTRY VIEW -->
+          <record model="ir.ui.view" id="country_attr_list">
+            <field name="name">All Countries</field>
+            <field name="model">student.country</field>
+            <field name="arch" type="xml">
+              <tree>
+                <field name="country_name"/>
+                <field name="country_code"/>
+                <field name="active"/>
+              </tree>
+            </field>
+          </record>
+
+          <record model="ir.ui.view" id="country_attr_form">
+            <field name="name">Edit Countries</field>
+            <field name="model">student.country</field>
+            <field name="arch" type="xml">
+              <form>
+
+                  <group>
+                    <group>
+                      <field name="country_name" style="max-width:250px"/>
+                      <field name="country_code" style="max-width: 250px"/>
+                      <field name="active"/>
+                    </group>
+                    <group>
+                      <div name="button_box" position="inside">
+                        <button class="oe_inline oe_stat_button" name="%(filtered_students_list)d" context="{'search_default_country_id': [active_id]}" type="action" icon="fa-star">
+                          <span><field name="students_count"></field> Students</span>
+                        </button>
+                      </div>
+                    </group>
+                  </group>
+
+                  <group>
+                    <field name="student_ids" />
+                  </group>
+
+              </form>
+            </field>
+          </record>
+        <!-- MANAGE COUNTRY VIEW -->
+
+
+        <!-- COUNTRY ACTION WINDOW -->
+        <record model="ir.actions.act_window" id="country_attr_action_window">
+          <field name="name">Manage Countries</field>
+          <field name="res_model">student.country</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">['|',('active','=',True),('active','=',False)]</field>
+          <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+              Click here to create new item!
+            </p>
+          </field>
+        </record>
+        <!-- COUNTRY ACTION WINDOW -->
+
+    </data>
+</odoo>

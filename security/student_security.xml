@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record model="res.groups" id="group_student_manager">
+            <field name="name">Student Access Rights</field>
+        </record>
+        <record model="res.groups" id="student_group_system">
+            <field name="name">Settings</field>
+            <field name="implied_ids" eval="[(4, ref('student.group_student_manager'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record model="res.groups" id="student_group_user">
+            <field name="name">Student Users</field>
+        </record>
+
+        <!-- DEFAULT USER
+        <record model="res.users" id="default_user">
+            <field name="groups_id" eval="[(4,ref('student.student_group_user'))]"/>
+        </record>-->
+
+        <!-- PUBLIC USER
+        <record model="res.users" id="public_user">
+            <field name="groups_id" eval="[(4, ref('student.group_public'))]"/>
+        </record>
+         PUBLIC USER -->
+
+    </data>
+
+    <data noupdate="1">
+
+
+    </data>
+</odoo>

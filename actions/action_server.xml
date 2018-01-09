@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <!-- STUDENT ACTION SERVER -->
+        <record id="action_change_to_india" model="ir.actions.server">
+            <field name="name">Change Country(India)</field>
+            <field name="res_model">student.profile</field>
+            <field name="model_id" ref="student.student_profile"/>
+           <field name="code">
+obj = env['student.profile'].browse(context.get('active_ids'))
+obj.write({'country_id': '1'})
+            </field>
+        </record>
+
+        <record id="action_change_to_aus" model="ir.actions.server">
+            <field name="name">Change Country(Aus)</field>
+            <field name="res_model">student.profile</field>
+            <field name="model_id" ref="student.student_profile"/>
+           <field name="code">
+obj = env['student.profile'].browse(context.get('active_ids'))
+obj.write({'country_id': '2'})
+            </field>
+        </record>
+
+        <record id="send_mail_to_selected" model="ir.actions.server">
+            <field name="name">Send Profile Report(Selected)</field>
+            <field name="res_model">student.profile</field>
+            <field name="model_id" ref="student.student_profile"/>
+            <field name="code">
+obj = env['student.profile'].browse(context.get('active_ids'))
+for o in obj:
+    env['student.profile'].action_quotation_send_selected(o)
+            </field>
+        </record>
+
+        <record id="send_mail_to_all" model="ir.actions.server">
+            <field name="name">Send Profile Report(All)</field>
+            <field name="res_model">student.profile</field>
+            <field name="model_id" ref="student.student_profile"/>
+           <field name="code">
+env['student.profile'].action_quotation_send_all()
+            </field>
+        </record>
+
+        <record id="send_attendance_mail_to_selected" model="ir.actions.server">
+            <field name="name">Send Attendance Report(Selected)</field>
+            <field name="res_model">student.profile</field>
+            <field name="model_id" ref="student.student_profile"/>
+            <field name="code">
+obj = env['student.profile'].browse(context.get('active_ids'))
+for o in obj:
+    env['student.profile'].action_quotation_send_attendance_selected(o)
+            </field>
+        </record>
+
+        <record id="send_attendance_mail_to_all" model="ir.actions.server">
+            <field name="name">Send Attendance Report(All)</field>
+            <field name="res_model">student.profile</field>
+            <field name="model_id" ref="student.student_profile"/>
+           <field name="code">
+env['student.profile'].action_quotation_send_attendance_all()
+            </field>
+        </record>
+
+
+        <record id="act_new_sub_menu" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'student.profile'" name="model"/>
+            <field name="name">Change Country(India)</field>
+            <field eval="'ir.actions.server,%d'%action_change_to_india" name="value"/>
+        </record>
+
+        <record id="act_new_sub_menu_2" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'student.profile'" name="model"/>
+            <field name="name">Change Country(Aus)</field>
+            <field eval="'ir.actions.server,%d'%action_change_to_aus" name="value"/>
+        </record>
+
+        <record id="act_new_sub_menu_3" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'student.profile'" name="model"/>
+            <field name="name">Send Profile Mail(Selected)</field>
+            <field eval="'ir.actions.server,%d'%send_mail_to_selected" name="value"/>
+        </record>
+
+        <record id="act_new_sub_menu_4" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'student.profile'" name="model"/>
+            <field name="name">Send Profile Mail(All)</field>
+            <field eval="'ir.actions.server,%d'%send_mail_to_all" name="value"/>
+        </record>
+
+        <record id="act_new_sub_menu_5" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'student.profile'" name="model"/>
+            <field name="name">Send Attendance Mail(Selected)</field>
+            <field eval="'ir.actions.server,%d'%send_attendance_mail_to_selected" name="value"/>
+        </record>
+
+        <record id="act_new_sub_menu_6" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'student.profile'" name="model"/>
+            <field name="name">Send Attendance Mail(All)</field>
+            <field eval="'ir.actions.server,%d'%send_attendance_mail_to_all" name="value"/>
+        </record>
+
+      <!-- STUDENT ACTION SERVER -->
+    </data>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- MANAGE HOBBY VIEW -->
+          <record model="ir.ui.view" id="hobby_attr_list">
+            <field name="name">All Hobbies</field>
+            <field name="model">student.hobbies</field>
+            <field name="arch" type="xml">
+              <tree>
+                <field name="hobbies_sequence" widget="handle"/>
+                <field name="hobby_name"/>
+              </tree>
+            </field>
+          </record>
+
+          <record model="ir.ui.view" id="hobby_attr_form">
+            <field name="name">Edit Hobbies</field>
+            <field name="model">student.hobbies</field>
+            <field name="arch" type="xml">
+              <form>
+                <group>
+                  <group>
+                    <field name="hobby_name" style="max-width:250px"/>
+                  </group>
+                  <group>
+                    <div name="button_box" position="inside">
+                      <button class="oe_inline oe_stat_button" name="%(filtered_students_list)d" context="{'search_default_hobbies_ids': [active_id]}" type="action" icon="fa-star">
+                        <span><field name="students_count"></field> Students</span>
+                      </button>
+                    </div>
+                  </group>
+                </group>
+                <group>
+                  <field name="student_ids" widget="handle" />
+                </group>
+              </form>
+            </field>
+          </record>
+        <!-- MANAGE HOBBY VIEW -->
+
+            <!-- HOBBY ACTION WINDOW -->
+            <record model="ir.actions.act_window" id="hobby_attr_action_window">
+              <field name="name">Manage Hobbies</field>
+              <field name="res_model">student.hobbies</field>
+              <field name="view_mode">tree,form</field>
+              <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                  Click here to create new item!
+                </p>
+              </field>
+            </record>
+            <!-- HOBBY ACTION WINDOW -->
+    </data>
+</odoo>
