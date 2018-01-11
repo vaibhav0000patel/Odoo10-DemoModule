@@ -39,7 +39,9 @@ class student(models.Model):
 
     kb_color = fields.Integer('Color Index', compute="change_color_on_kanban", store=True)
 
-
+    _sql_constraints = [
+        ('unique_email', 'unique (email)', "The email is already registered"),
+    ]
 
 
     @api.one
@@ -130,8 +132,6 @@ class student(models.Model):
 
 
 
-
-
     # PROFILE MAIL
     @api.multi
     def action_quotation_send(self):
@@ -150,6 +150,7 @@ class student(models.Model):
             template_id = obj.env.ref('student.student_profile_email_template')
             template_id.send_mail(obj.id)
     # PROFILE MAIL
+
 
 
 
