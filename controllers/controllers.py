@@ -21,6 +21,6 @@ from odoo import http
 
 class Student(http.Controller):
     @http.route('/student/example', auth="public", website="true")
-    def index(self):
+    def index(self,id=None):
         students = http.request.env['student.profile'].sudo().search([])
         return http.request.render('student.example_page', {'students':students})

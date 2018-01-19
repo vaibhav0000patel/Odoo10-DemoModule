@@ -17,6 +17,13 @@
                 <div class="col-md-5">
                   <table class="table table-striped">
                     <tr>
+                      <td colspan="2">
+                        <div style="float:left;width:100%;" align="center">
+                         <div t-field="student.data_image" t-field-options='{"widget": "image"}' style="width:150px;display:inline-block;"/>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
                       <td>Name</td>
                       <td><span t-field="student.name"/></td>
                     </tr>
